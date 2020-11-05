@@ -9,37 +9,33 @@ import Login from './Components/Login';
 
 const USER_URL = "http://localhost:3000/users"
 const REVIEW_URL = "http://localhost:3000/reviews"
-const ALBUM_URL = "http://localhost:3000/albums"
-
 
 const App = () => {
 
   const [userApi, setUserApi] = useState([]);
   const [reviewApi, setReviewApi] = useState([]);
-  const [albumApi, setAlbumApi] = useState([]);
   const [user, setUser] = useState(null);
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
+    async function getUserData() {
     fetch(USER_URL)
       .then(res => res.json())
       .then(userData => setUserApi(userData))
       .catch(console.log)
+    } 
+    getUserData()
   }, [])
 
   useEffect(() => {
+    async function getReviews() {
     fetch(REVIEW_URL)
       .then(res => res.json())
       .then(reviewData => setReviewApi(reviewData))
       .catch(console.log)
+    }
+    getReviews()
   }, [])
-
-  useEffect(() => {
-    fetch(ALBUM_URL)
-        .then(res => res.json())
-        .then(albumData => setAlbumApi(albumData))
-        .catch(console.log)
-}, [])
 
   const login = el => {
     setUser(el)
@@ -82,20 +78,17 @@ const App = () => {
         user: user
       })
     })
-    .then(res => res.json())
-    .then(review => setReviewApi([...reviewApi, review]))
+      .then(res => res.json())
+      .then(review => setReviewApi([...reviewApi, review]))
   }
 
-  // const deleteReview = reviewId => {
-  //   fetch(REVIEW_URL, {
-  //     method: 'DELETE'
-  //   }).then(res => res.json()).then(data => {
-  //       let newArray = reviewApi.filter(rev => rev.id !== reviewId)
-  //       setReviewApi(newArray)
-  //   })
-  // }
+  const deleteReview = reviewId => {
+    fetch(`http://localhost:3000/reviews/${reviewId}`, {
+      method: 'DELETE'
+    });
+  }
 
-  
+
   return (
     <>
       {redirect ? <Redirect to={'/profile'} /> : null}
@@ -104,8 +97,8 @@ const App = () => {
       <Switch>
         <Route path='/signup' render={() => <Signup newUser={newUser} />} />
         <Route path='/login' render={() => <Login users={userApi} login={login} />} />
-        <Route path='/profile' render={() => <Profile user={user} users={userApi} reviews={reviewApi} albums={albumApi} />} />
-        <Route path='/albums' render={() => <AlbumContainer users={userApi} user={user} reviews={reviewApi} albums={albumApi} newReview={newReview} />} />
+        <Route path='/profile' render={() => <Profile user={user} users={userApi} reviews={reviewApi} />} />
+        <Route path='/albums' render={() => <AlbumContainer users={userApi} user={user} reviews={reviewApi} newReview={newReview} deleteReview={deleteReview} />} />
       </Switch>
 
     </>

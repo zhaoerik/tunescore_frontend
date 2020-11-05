@@ -12,7 +12,7 @@ const Album = (props) => {
             <h1>{props.album.name}</h1>
             <h3>{props.album.artists[0].name}</h3>
             <h3>Album Popularity: {props.album.popularity}</h3>
-            <h3>{props.album.release_date}</h3>
+            <h3>Release Date: {props.album.release_date}</h3>
             <br></br>
         </>
     )

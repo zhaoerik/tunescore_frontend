@@ -16,11 +16,14 @@ const Profile = (props) => {
                         {/* </NavLink> */}
                     </li>
                     <p>
-                        {rev.album.name}
+                        <b>{rev.album.name}</b>
                         <br></br>
                     Popularity: {rev.album.popularity}
                         <br></br>
+                        <br></br>
                     Review: {rev.description}
+                    <br></br>
+                    User Rating: {rev.rating}
                     </p>
                 </>
             )
