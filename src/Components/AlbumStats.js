@@ -16,36 +16,36 @@ const AlbumStats = (props) => {
 
     useEffect(() => {
         async function getReviews() {
-        fetch(REVIEW_URL)
-          .then(res => res.json())
-          .then(reviewData => setReviewApi(reviewData))
-          .catch(console.log)
+            fetch(REVIEW_URL)
+                .then(res => res.json())
+                .then(reviewData => setReviewApi(reviewData))
+                .catch(console.log)
         }
         getReviews()
-      }, [])
+    }, [])
 
-      useEffect(() => {
+    useEffect(() => {
         async function getReviews() {
-        fetch(REVIEW_URL)
-          .then(res => res.json())
-          .then(reviewData => setReviewApi(reviewData))
-          .catch(console.log)
+            fetch(REVIEW_URL)
+                .then(res => res.json())
+                .then(reviewData => setReviewApi(reviewData))
+                .catch(console.log)
         }
         getReviews()
-      }, [addReview, deletedReview])
+    }, [addReview, deletedReview])
 
-      useEffect(() => {
-          if (addReview) {
-              setAddReview(false);
-          }
-      }, [reviewApi])
-
-      useEffect(() => {
-        if (deletedReview) {
-          setDeletedReview(false)
+    useEffect(() => {
+        if (addReview) {
+            setAddReview(false);
         }
-      }, [reviewApi])
-    
+    }, [reviewApi])
+
+    useEffect(() => {
+        if (deletedReview) {
+            setDeletedReview(false)
+        }
+    }, [reviewApi])
+
     const changeHandle = e => {
         if (e.target.name === "description") {
             setDescription(e.target.value)
@@ -55,8 +55,6 @@ const AlbumStats = (props) => {
             // console.log(e.target.value)
         }
     }
-
-
 
     const submitHandle = e => {
         e.preventDefault()
@@ -74,7 +72,6 @@ const AlbumStats = (props) => {
         } else {
             alert('You have already submitted a review!')
         }
-
     }
 
     const handleDelete = reviewId => {
@@ -97,7 +94,7 @@ const AlbumStats = (props) => {
 
     let reviewIds = props.album.reviews.map(review => review.id)
     let userReviewId = props.user.reviews.map(review => review.id)
-    
+
     // console.log(reviewIds.filter(value => userReviewId.includes(value)))
     // console.log(props.user.reviews.find(review => review.id))
 
@@ -116,6 +113,7 @@ const AlbumStats = (props) => {
             <ol key={review.id}>
                 <img alt="" src={review.user.image} />
                 <h3>{review.user.name}</h3>
+                <h4>{review.user.badge}</h4>
                     Rating: {review.rating}
                 <br></br>
                     Review: {review.description}
@@ -147,11 +145,12 @@ const AlbumStats = (props) => {
                 <ol key={review.id}>
                     <img alt="" src={review.user.image} />
                     <h3>{review.user.name}</h3>
+                    <h4>{review.user.badge}</h4>
                     Rating: {review.rating}
                     <br></br>
                     Review: {review.description}
                     <br></br>
-                    <button onClick={() => {handleDelete(reviewId)}}>Delete</button>
+                    <button onClick={() => { handleDelete(reviewId) }}>Delete</button>
                 </ol>
             )
         )

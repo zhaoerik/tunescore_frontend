@@ -14,6 +14,9 @@ const NavBar = (props) => {
                     <NavLink to='/profile'>
                         <li>Profile</li>
                     </NavLink>
+                    <NavLink to='/lyricgame'>
+                        <li>Lyric Game</li>
+                    </NavLink>
                     <NavLink to='/albums'>
                         <li>Albums</li>
                     </NavLink>

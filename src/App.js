@@ -6,8 +6,10 @@ import AlbumContainer from './Containers/AlbumContainer';
 import Profile from './Components/Profile';
 import Signup from './Components/Signup';
 import Login from './Components/Login';
+import QuizContainer from './Containers/QuizContainer';
+// import QuizArray from '../Components/QuizApi'
 
-const USER_URL = "http://localhost:3000/users"
+const USER_URL = "http://localhost:3000/users/"
 const REVIEW_URL = "http://localhost:3000/reviews"
 
 const App = () => {
@@ -19,20 +21,20 @@ const App = () => {
 
   useEffect(() => {
     async function getUserData() {
-    fetch(USER_URL)
-      .then(res => res.json())
-      .then(userData => setUserApi(userData))
-      .catch(console.log)
-    } 
+      fetch(USER_URL)
+        .then(res => res.json())
+        .then(userData => setUserApi(userData))
+        .catch(console.log)
+    }
     getUserData()
   }, [])
 
   useEffect(() => {
     async function getReviews() {
-    fetch(REVIEW_URL)
-      .then(res => res.json())
-      .then(reviewData => setReviewApi(reviewData))
-      .catch(console.log)
+      fetch(REVIEW_URL)
+        .then(res => res.json())
+        .then(reviewData => setReviewApi(reviewData))
+        .catch(console.log)
     }
     getReviews()
   }, [])
@@ -55,7 +57,6 @@ const App = () => {
       body: JSON.stringify(userObj)
     })
       .then(res => res.json())
-      // .then(console.log)
       .then(userInfo => {
         setUserApi([userInfo, ...userApi])
         login(newUser)
@@ -64,7 +65,6 @@ const App = () => {
   }
 
   const newReview = (album, user, description, rating) => {
-    // console.log(album, user, description, rating)
     fetch(REVIEW_URL, {
       method: 'POST',
       headers: {
@@ -88,6 +88,30 @@ const App = () => {
     });
   }
 
+  const updateBadge = (score, userId) => {
+    if (score === 5) {
+      fetch(USER_URL + userId, {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+          "accepts": "application/json"
+        },
+        body: JSON.stringify({ badge: "Master" })
+
+      })
+    } else if (score === 4) {
+      fetch(USER_URL + userId, {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+          "accepts": "application/json"
+        },
+        body: JSON.stringify({ badge: "Advanced" })
+      })
+
+    }
+  }
+
 
   return (
     <>
@@ -97,8 +121,9 @@ const App = () => {
       <Switch>
         <Route path='/signup' render={() => <Signup newUser={newUser} />} />
         <Route path='/login' render={() => <Login users={userApi} login={login} />} />
-        <Route path='/profile' render={() => <Profile user={user} users={userApi} reviews={reviewApi} />} />
-        <Route path='/albums' render={() => <AlbumContainer users={userApi} user={user} reviews={reviewApi} newReview={newReview} deleteReview={deleteReview} />} />
+        <Route path='/profile' render={() => <Profile user={user} reviews={reviewApi} />} />
+        <Route path='/albums' render={() => <AlbumContainer user={user} reviews={reviewApi} newReview={newReview} deleteReview={deleteReview} />} />
+        <Route path='/lyricgame' render={() => <QuizContainer user={user} updateBadge={updateBadge} />} />
       </Switch>
 
     </>

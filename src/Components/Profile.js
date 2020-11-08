@@ -1,12 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
+
+const USER_URL = "http://localhost:3000/users/"
 
 const Profile = (props) => {
 
+    const [userApi, setUserApi] = useState();
+
+    useEffect(() => {
+        async function getUserData() {
+            fetch(USER_URL)
+                .then(res => res.json())
+                .then(userData => 
+                    setUserApi(userData))
+                .catch(console.log)
+        }
+        getUserData()
+    }, [])
+
+    // useEffect(() => {
+    //     console.log(userApi)
+    //     const targetUser = userApi && userApi.filter((users) => users.id === props.user.id) 
+    //     setUser(targetUser)
+    // }, [userApi])
+
     const renderReviews = () => {
         let userReviews = props.reviews.filter(review => review.user.id === props.user.id)
-        // let albumMap = props.albums.map(album => album.id)
-        // console.log(albumMap)
+
         if (props.user.reviews) {
             return userReviews.map(rev =>
                 <>
@@ -22,7 +42,7 @@ const Profile = (props) => {
                         <br></br>
                         <br></br>
                     Review: {rev.description}
-                    <br></br>
+                        <br></br>
                     User Rating: {rev.rating}
                     </p>
                 </>
@@ -34,19 +54,26 @@ const Profile = (props) => {
         }
     }
 
+    const renderUserInfo = () => {
+        let user = userApi ? userApi.filter((users) => users.id === props.user.id)[0] : props.user
+        return (
+            user ? 
+                <div key={user.id}>
+                    <img alt="" src={user.image} />
+                    <h2>{user.username}</h2>
+                    <h4>{user.name}</h4>
+                    <h4>{user.email}</h4>
+                    <h4>{user.badge}</h4>
+                    {renderReviews()}
+                </div>
+                :
+                <Redirect to='/login' />
+        )
+    }
 
-return (
-    props.user ?
-        <div key={props.user.id}>
-            <img alt="" src={props.user.image} />
-            <h2>{props.user.username}</h2>
-            <h4>{props.user.name}</h4>
-            <h4>{props.user.email}</h4>
-            {renderReviews()}
-        </div>
-        :
-        <Redirect to='/login' />
-)
+    return (
+        renderUserInfo()
+    )
 
 }
 
