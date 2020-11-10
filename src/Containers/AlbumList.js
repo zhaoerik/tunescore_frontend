@@ -10,7 +10,7 @@ const AlbumList = (props) => {
 
     return (
         <>
-            <Search value={props.search} onChange={props.onChange} />
+            <Search value={props.search} onChange={props.onChange}/>
             <div>
                 {props.filteredAlbum ? renderFilteredAlbums() : null}
             </div>

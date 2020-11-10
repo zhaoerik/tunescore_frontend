@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
+import styled from 'styled-components'
+
 const REVIEW_URL = "http://localhost:3000/reviews"
 
 const AlbumStats = (props) => {
@@ -79,14 +81,18 @@ const AlbumStats = (props) => {
         setDeletedReview(true)
     }
 
-    // console.log(props.users.filter(user => user.reviews.id === props.reviews.id))
+    const explicit = (explicitTrack) => {
+        if (explicitTrack === "t") {
+            return ("Yes")
+        } else {
+            return ("No")
+        }
+    }
 
     const renderTracks = () => {
         return props.album.tracks.map(track =>
             <ol key={track.id}>
-                <p>{track.name}</p>
-                <p>Popularity: {track.popularity}</p>
-                <p>Explicit: {track.explicit}</p>
+                <b>{track.name}</b>  Popularity: {track.popularity} Explicit: {explicit(track.explicit)}
                 <br></br>
             </ol>
         )
@@ -95,29 +101,24 @@ const AlbumStats = (props) => {
     let reviewIds = props.album.reviews.map(review => review.id)
     let userReviewId = props.user.reviews.map(review => review.id)
 
-    // console.log(reviewIds.filter(value => userReviewId.includes(value)))
-    // console.log(props.user.reviews.find(review => review.id))
-
-    // const deleteButton = () => {
-    //     let reviewId = reviewIds.filter(value => userReviewId.includes(value))
-    //     return <button onClick={props.deleteReview(reviewId)}>Delete</button>
-    // }
-
-    // console.log(albumReviews.filter(review => review.user.id !== props.user.id))
-    // console.log(albumReviews)
-
     const otherReviews = () => {
         const albumReviews = reviewApi.filter(review => review.album.name === props.album.name)
         const nonUserReviews = albumReviews.filter(review => review.user.id !== props.user.id)
         return nonUserReviews.map(review =>
-            <ol key={review.id}>
-                <img alt="" src={review.user.image} />
-                <h3>{review.user.name}</h3>
-                <h4>{review.user.badge}</h4>
-                    Rating: {review.rating}
-                <br></br>
+            <UsersInfo>
+                <ol key={review.id}>
+                    <UserImage alt="" src={review.user.image} />
+                    <h3>{review.user.name}</h3>
+                    <h4>{review.user.badge}</h4>
+                    <br />
+                    <UsersReviews>
+                        Rating: {review.rating}
+                        <br></br>
                     Review: {review.description}
-            </ol>
+                    </UsersReviews>
+                    <br />
+                </ol>
+            </UsersInfo>
         )
     }
     // return albumReviews.map(review => 
@@ -142,31 +143,41 @@ const AlbumStats = (props) => {
         // console.log('review id' + reviewId)
         return (
             userReview.map(review =>
-                <ol key={review.id}>
-                    <img alt="" src={review.user.image} />
-                    <h3>{review.user.name}</h3>
-                    <h4>{review.user.badge}</h4>
-                    Rating: {review.rating}
-                    <br></br>
-                    Review: {review.description}
-                    <br></br>
-                    <button onClick={() => { handleDelete(reviewId) }}>Delete</button>
-                </ol>
+                <UsersInfo>
+                    <ol key={review.id}>
+                        <UserImage alt={review.user.name} src={review.user.image} />
+                        <h3>{review.user.name}</h3>
+                        <h4>{review.user.badge}</h4>
+                        <UsersReviews>
+                            User Rating: {review.rating}
+                            <br></br>
+                            User Review: {review.description}
+                            <br /><br />
+                            <button onClick={() => { handleDelete(reviewId) }}>Delete</button>
+                        </UsersReviews>
+                    </ol>
+                </UsersInfo>
             )
         )
     }
 
     return (
         props.user ?
-            <div>
-                <img alt={props.album.name} src={props.album.image} />
-                <h1>{props.album.name}</h1>
-                <h3>{props.album.artists[0].name}</h3>
-                <h3>{props.album.release_date}</h3>
-                <h2>Tracklist</h2>
-                {renderTracks()}
+            <>
+                <AlbumTrack>
+                    <AlbumInfo>
+                        <img alt={props.album.name} src={props.album.image} />
+                        <h1>{props.album.name}</h1>
+                        <h3>{props.album.artists[0].name}</h3>
+                        <h3>{props.album.release_date}</h3>
+                    </AlbumInfo>
+                    <Tracks>
+                        <TrackList>Tracklist</TrackList>
+                        {renderTracks()}
+                    </Tracks>
+                </AlbumTrack>
                 <br></br>
-                <h2>Reviews</h2>
+                <ReviewsHeader>Reviews</ReviewsHeader>
                 {otherReviews()}
                 {userReview()}
                 <form onSubmit={submitHandle}>
@@ -174,10 +185,47 @@ const AlbumStats = (props) => {
                     <input name="rating" onChange={changeHandle} placeholder="Rating" value={rating}></input>
                     <button type="submit">Submit Review</button>
                 </form>
-            </div>
+            </>
             :
             <Redirect to='/login' />
     )
 }
 
 export default AlbumStats
+
+const AlbumTrack = styled.div`
+    display: flex
+`
+
+const AlbumInfo = styled.div`
+    // display: flex;
+`
+
+const Tracks = styled.div`
+
+`
+
+const TrackList = styled.h2`
+    margin-top: 11%;
+`
+
+const ReviewsHeader = styled.h1`
+
+`
+
+const UserImage = styled.img`
+    height: 150px;
+    width: 150px;
+`
+
+const UsersInfo = styled.div`
+    display: flex;
+    flexDirection: row;
+`
+
+const UsersReviews = styled.div`
+    margin-top: -11.5%;
+    margin-left: 11%;
+    margin-bottom: 5%;
+`
+

@@ -80,13 +80,13 @@ const quizArray = [
         artist: "Drake"
     },
     {
-        lyric: "I hope you learn to make it on your own",
-        choices: ["I hope that you get everything you want and that you chose", "And if you love yourself just know you'll never be alone", "I hope that it's the realest thing that you ever know", "Hope you get the pretty girls, that's pretty and everything"],
-        answer: "And if you love yourself just know you'll never be alone",
+        lyric: "Look, I woke up in beast mode",
+        choices: ["Everything I do is righteous, betting on me is the right risk", "With my girl, that's beauty and the beast though", "I hope that it's the realest thing that you ever know", "Hope you get the pretty girls, that's pretty and everything"],
+        answer: "With my girl, that's beauty and the beast though",
         id: "9",
         image: "https://upload.wikimedia.org/wikipedia/en/c/c8/Big_Sean_-_Dark_Sky_Paradise_%28Official_album_Cover%29.png",
-        album: "Dark Sky Paradise",
-        track: "One Man Can Change The World",
+        album: "I Decided.",
+        track: "Bounce Back",
         artist: "Big Sean"
     },
     {
@@ -150,13 +150,13 @@ const quizArray = [
         artist: "A$AP Rocky"
     },
     {
-        lyric: "Tears on the mausoleum floor",
-        choices: ["Lies on the lips of a priest", "Rollin' in the Rolls-Royce Corniche", "Blood stains the Coliseum doors", "Thanksgiving disguised as a feast"],
-        answer: "Blood stains the Coliseum doors",
+        lyric: "Y'all think it's bougie, I'm like, it's fine",
+        choices: ["I coulda bought a place in Dumbo before it was Dumbo", "That same building today is worth twenty-five million", "Financial freedom my only hope", "But I'm tryin' to give you a million dollars worth of game for nine ninety-nine"],
+        answer: "But I'm tryin' to give you a million dollars worth of game for nine ninety-nine",
         id: "16",
-        image: "https://upload.wikimedia.org/wikipedia/en/e/ee/Watch_The_Throne.jpg",
-        album: "Watch The Throne",
-        track: "No Church In The Wild",
+        image: "https://upload.wikimedia.org/wikipedia/commons/a/ac/4-44_album_cover.png",
+        album: "4:44",
+        track: "The Story Of O.J.",
         artist: "JAY-Z"
     }
 ];
