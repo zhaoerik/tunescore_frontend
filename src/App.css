@@ -3,5 +3,25 @@
 }
 
 .album_image:hover {
-    transform: scale(1.05)
+    transform: scale(1.07)
 }
+
+table {
+    width: 250%;
+    height: 0%;
+}
+
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    width: 25%;
+}
+
+th {
+    text-align: left;
+    width: 30%;
+}
+
+tr:hover {background-color:#f5f5f5;}
+

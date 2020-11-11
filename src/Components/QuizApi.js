@@ -84,7 +84,7 @@ const quizArray = [
         choices: ["Everything I do is righteous, betting on me is the right risk", "With my girl, that's beauty and the beast though", "I hope that it's the realest thing that you ever know", "Hope you get the pretty girls, that's pretty and everything"],
         answer: "With my girl, that's beauty and the beast though",
         id: "9",
-        image: "https://upload.wikimedia.org/wikipedia/en/c/c8/Big_Sean_-_Dark_Sky_Paradise_%28Official_album_Cover%29.png",
+        image: "https://upload.wikimedia.org/wikipedia/en/a/a8/BigSeanIDecided.jpg",
         album: "I Decided.",
         track: "Bounce Back",
         artist: "Big Sean"
@@ -106,7 +106,7 @@ const quizArray = [
         id: "11",
         image: "https://upload.wikimedia.org/wikipedia/en/5/5e/Daytona_by_Pusha_T.jpg",
         album: "Daytona",
-        Track: "What Would Meek Do?",
+        track: "What Would Meek Do?",
         artist: "Pusha T"
     },
     {

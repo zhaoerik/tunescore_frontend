@@ -20,7 +20,7 @@ const NavBar = (props) => {
                     <Link to='/albums'>
                         <Li>
                             <Logo alt="" src={SignedInLogo} />
-                            <Name>Tunescore</Name>
+                            <Name>TuneScore</Name>
                         </Li>
                     </Link>
                     <Link to='/login' onClick={logoutHandle}>
@@ -28,6 +28,9 @@ const NavBar = (props) => {
                     </Link>
                     <Link to='/lyricgame'>
                         <Li><b>Lyric Game</b></Li>
+                    </Link>
+                    <Link to='/albums'>
+                        <Li><b>Albums</b></Li>
                     </Link>
                     <Link to='/profile'>
                         <Li><b>Profile</b></Li>
@@ -37,7 +40,7 @@ const NavBar = (props) => {
                 <NavLink to='/login'>
                     <div>
                         <Logo alt="" src={LoginLogo} />
-                        <NameLogin>Tunescore</NameLogin>
+                        <NameLogin>TuneScore</NameLogin>
                     </div>
                 </NavLink>
             }
@@ -58,7 +61,6 @@ const Link = styled(NavLink)`
 `
 
 const Nav = styled.div`
-    overflow: hidden;
     position: fixed;
     width: 100%;
     padding: 1%;

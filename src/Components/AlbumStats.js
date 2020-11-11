@@ -83,18 +83,25 @@ const AlbumStats = (props) => {
 
     const explicit = (explicitTrack) => {
         if (explicitTrack === "t") {
-            return ("Yes")
+            return ("Explicit")
         } else {
-            return ("No")
+            return ("")
         }
     }
 
     const renderTracks = () => {
         return props.album.tracks.map(track =>
-            <ol key={track.id}>
-                <b>{track.name}</b>  Popularity: {track.popularity} Explicit: {explicit(track.explicit)}
-                <br></br>
-            </ol>
+            // <ol key={track.id}>
+            <table>
+                <tr key={track.id}>
+                    <td><b>{track.name}</b></td>
+                    <td>{track.popularity}</td>
+                    <td>{explicit(track.explicit)}</td>
+                </tr>
+            </table>
+            // <b>{track.name}</b>  Popularity: {track.popularity} Explicit: {explicit(track.explicit)}
+            // <br></br> 
+            // </ol>
         )
     }
 
@@ -109,7 +116,9 @@ const AlbumStats = (props) => {
                 <ol key={review.id}>
                     <UserImage alt="" src={review.user.image} />
                     <h3>{review.user.name}</h3>
-                    <h4>{review.user.badge}</h4>
+                    <BadgeDiv>
+                        <h4>{review.user.badge}</h4>
+                    </BadgeDiv>
                     <br />
                     <UsersReviews>
                         Rating: {review.rating}
@@ -121,41 +130,29 @@ const AlbumStats = (props) => {
             </UsersInfo>
         )
     }
-    // return albumReviews.map(review => 
-    //     <ol key={review.id}>
-    //     <img alt="" src={review.user.image} />
-    //     <h3>{review.user.name}</h3>
-    //     Rating: {review.rating}
-    //     <br></br>
-    //     Review: {review.description}
-    //     </ol>
-    //     )
 
     const userReview = () => {
         const albumReviews = reviewApi.filter(review => review.album.name === props.album.name)
         const userReview = albumReviews.filter(review => review.user.id === props.user.id)
-        // for (let i =0; i < userReview.length; i++) {
-        //     console.log(userReview)
-        // }
+
         const reviewId = userReview[0]?.id;
-        // console.log('album review' + albumReviews)
-        // console.log('user reviews' + userReview)
-        // console.log('review id' + reviewId)
         return (
             userReview.map(review =>
                 <UsersInfo>
-                    <ol key={review.id}>
-                        <UserImage alt={review.user.name} src={review.user.image} />
+                    <User key={review.id}>
+                        <UserImage alt="" src={review.user.image} />
                         <h3>{review.user.name}</h3>
-                        <h4>{review.user.badge}</h4>
-                        <UsersReviews>
-                            User Rating: {review.rating}
+                        <OwnBadgeDiv>
+                            <h4>{review.user.badge}</h4>
+                        </OwnBadgeDiv>
+                    </User>
+                        <OwnReview>
+                            Your Rating: {review.rating}
                             <br></br>
-                            User Review: {review.description}
+                            Your Review: {review.description}
                             <br /><br />
-                            <button onClick={() => { handleDelete(reviewId) }}>Delete</button>
-                        </UsersReviews>
-                    </ol>
+                            <DeleteButton onClick={() => { handleDelete(reviewId) }}>Delete</DeleteButton>
+                        </OwnReview>
                 </UsersInfo>
             )
         )
@@ -172,7 +169,13 @@ const AlbumStats = (props) => {
                         <h3>{props.album.release_date}</h3>
                     </AlbumInfo>
                     <Tracks>
-                        <TrackList>Tracklist</TrackList>
+                        <TrackHeader>
+                            <tr>
+                                <th>Track Name</th>
+                                <th>Popularity</th>
+                                <th></th>
+                            </tr>
+                        </TrackHeader>
                         {renderTracks()}
                     </Tracks>
                 </AlbumTrack>
@@ -180,11 +183,14 @@ const AlbumStats = (props) => {
                 <ReviewsHeader>Reviews</ReviewsHeader>
                 {otherReviews()}
                 {userReview()}
-                <form onSubmit={submitHandle}>
-                    <textarea name="description" onChange={changeHandle} placeholder="Review" value={description}></textarea>
-                    <input name="rating" onChange={changeHandle} placeholder="Rating" value={rating}></input>
-                    <button type="submit">Submit Review</button>
-                </form>
+                <Form onSubmit={submitHandle}>
+                    <h1>Write A Review:</h1>
+                    <ReviewArea name="description" onChange={changeHandle} placeholder="Review" value={description}></ReviewArea>
+                    <br />
+                    <RatingInput name="rating" onChange={changeHandle} placeholder="Rating" value={rating}></RatingInput>
+                    <br /><br />
+                    <SubmitButton type="submit">Submit Review</SubmitButton>
+                </Form>
             </>
             :
             <Redirect to='/login' />
@@ -198,19 +204,17 @@ const AlbumTrack = styled.div`
 `
 
 const AlbumInfo = styled.div`
-    // display: flex;
+    margin-top: 7%;
+    margin-left: 7%;
+    text-align: center;
 `
 
 const Tracks = styled.div`
-
-`
-
-const TrackList = styled.h2`
-    margin-top: 11%;
+    margin-top: 8%;
 `
 
 const ReviewsHeader = styled.h1`
-
+    text-align: center;
 `
 
 const UserImage = styled.img`
@@ -220,7 +224,14 @@ const UserImage = styled.img`
 
 const UsersInfo = styled.div`
     display: flex;
-    flexDirection: row;
+`
+    
+const User = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-left: 3%;
+    margin-left: 40px;
+    margin-top: 1%;
 `
 
 const UsersReviews = styled.div`
@@ -228,4 +239,59 @@ const UsersReviews = styled.div`
     margin-left: 11%;
     margin-bottom: 5%;
 `
+const TrackHeader = styled.table`
+    font-size: 24px;
+`
 
+const ReviewArea = styled.textarea`
+    height: 100px;
+    width: 500px;
+    font-family: 'Montserrat', sans-serif;
+`
+
+const RatingInput = styled.input`
+    width: 50px;
+`
+
+const Form = styled.form`
+    margin-left: 2%;
+`
+
+const OwnReview = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-top: 3.5%;
+    margin-left: 38px;
+`
+const BadgeDiv = styled.div`
+    margin-top: -1%;
+`
+
+const OwnBadgeDiv = styled.div`
+    margin-top: -32px;
+`
+
+const SubmitButton = styled.button`
+    padding: 10px;
+    background-color: #0b40ff;
+    outline: none;
+    border: none;
+    font-size: 1em;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+`
+
+const DeleteButton = styled.button`
+    padding: 10px;
+    background-color: #ff0000;
+    outline: none;
+    border: none;
+    font-size: 1em;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 68px;
+`

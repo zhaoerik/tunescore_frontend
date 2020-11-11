@@ -7,7 +7,6 @@ import Profile from './Components/Profile';
 import Signup from './Components/Signup';
 import Login from './Components/Login';
 import QuizContainer from './Containers/QuizContainer';
-// import QuizArray from '../Components/QuizApi'
 
 const USER_URL = "http://localhost:3000/users/"
 const REVIEW_URL = "http://localhost:3000/reviews"

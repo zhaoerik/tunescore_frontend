@@ -23,7 +23,7 @@ const Profile = (props) => {
     const renderReviews = () => {
         let userReviews = props.reviews.filter(review => review.user.id === props.user.id)
 
-        if (props.user.reviews) {
+        if (userReviews) {
             return userReviews.map(rev =>
                 <UserReviews>
                     <ul key={rev.id}>
@@ -42,9 +42,11 @@ const Profile = (props) => {
                     </ReviewInformation>
                 </UserReviews>
             )
-        } else {
+        } else if (userReviews === 0){
             return (
-                <h2>You have no reviews!</h2>
+                <UserReviews>
+                    <h2>You have no reviews!</h2>
+                </UserReviews>
             )
         }
     }
@@ -57,7 +59,7 @@ const Profile = (props) => {
                     <UserImage alt="" src={user.image} />
                     <UserInfo>
                         <br />
-                        <h2>{user.username}</h2>
+                        <UserName>{user.username}</UserName>
                         <h4>{user.name}</h4>
                         <h4>{user.email}</h4>
                         <h4>{user.badge}</h4>
@@ -80,10 +82,10 @@ const Profile = (props) => {
 export default Profile;
 
 const UserImage = styled.img`
-    height: 543px;
-    width: 360px;
+    height: 200px;
+    width: 200px;
     margin-top: 6%;
-    margin-left: 40%;
+    margin-left: 44.5%;
     display: flex;
 `
 
@@ -115,4 +117,8 @@ const UserReviews = styled.div`
 const ReviewInformation = styled.p`
     margin-left: 2%;
     margin-top: 1.5%;
+`
+
+const UserName = styled.h1`
+    font-size: 40px;
 `

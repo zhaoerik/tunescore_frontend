@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
 import Quiz from '../Components/Quiz';
 import QuizArray from '../Components/QuizApi'
 import Result from '../Components/Result';
+import styled from 'styled-components'
 
 const USER_URL = "http://localhost:3000/users/"
 
 const QuizContainer = (props) => {
 
     const [quizQuestion, setQuizQuestion] = useState([]);
-    const [score, setScore] = useState(5);
+    const [score, setScore] = useState(0);
     const [responses, setResponses] = useState(0);
 
     const getQuestions = () => {
         let questionBank = QuizArray.map(question => ({sort: Math.random(), value: question})).sort((question1, question2) => question1.sort - question2.sort).map((question => question.value))
-
-        // questionBank.map((lyric, choices, answer, id) => console.log(id))
         return (
             questionBank.slice(0, 5)
         )
@@ -28,8 +26,8 @@ const QuizContainer = (props) => {
 
     const computeAnswer = (answer, correctAns) => {
         if (answer === correctAns) {
-            console.log('i am correct')
-            //setScore(score + 1)
+            // console.log('i am correct')
+            setScore(score + 1)
         }
         setResponses(responses < 5 ? responses + 1 : 5)
     }
@@ -39,37 +37,35 @@ const QuizContainer = (props) => {
             props.updateBadge(score, props.user.id)
         }
         
-    //     if (responses === 5 ) {
-    //         if (score === 5) {
-    //         fetch(USER_URL + `${props.user.id}`, {
-    //             method: "PATCH",
-    //             headers: {
-    //                 "content-type": "application/json",
-    //                 "accepts": "application/json"
-    //             },
-    //             body: JSON.stringify({badge: "Master"})
-    //     })
-    //     } else if (score === 4) {
-    //         fetch(USER_URL + `${props.user.id}`, {
-    //             method: "PATCH",
-    //             headers: {
-    //                 "content-type": "application/json",
-    //                 "accepts": "application/json"
-    //             },
-    //             body: JSON.stringify({badge: "Advanced"})
-    // })}}
     }, [responses, score])
 
     return (
-        // props.user ?
         <>
-            <h1>Lyric Game</h1>
-            {quizQuestion.length > 0 && responses < 5 && quizQuestion.map((question) => <Quiz question={question.lyric} key={question.id} options={question.choices} selected={choice => computeAnswer(choice, question.answer)} />)}
-            {responses ===  5 ? <Result score={score}/> : null}        
+        <Div>
+            <LyricGame>Lyric Game</LyricGame>
+            <Subtitle>Finish the lyrics for a chance to earn a new badge!</Subtitle>
+        </Div>
+            {quizQuestion.length > 0 && responses < 5 && quizQuestion.map((question) => <Quiz question={question.lyric} key={question.id} options={question.choices} selected={choice => computeAnswer(choice, question.answer)} album={question.album} track={question.track} image={question.image} artist={question.artist} />)}
+            {responses ===  5 ? <Result user={props.user} score={score}/> : null}        
         </>
-        // :
-        // <Redirect to='/login' />
     )
 }
 
 export default QuizContainer;
+
+const LyricGame = styled.h1`
+    margin-top: 7%;
+    margin-bottom: 1%;
+    backgroud-color: white;
+    text-align: center;
+`
+
+const Subtitle = styled.h2`
+    text-align: center;   
+    margin-bottom: 3%;
+`
+
+const Div = styled.div`
+    background-color: white;
+    text-align: center;
+`
