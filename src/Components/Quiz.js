@@ -48,7 +48,6 @@ const AlbumImage = styled.img`
 `
 
 const Button = styled.button`
-    position: relative;
     padding: 10px;
     background-color: #0b40ff;
     display: inline-block;
@@ -71,12 +70,12 @@ const AlbumContainer = styled.div`
 `
 
 const Question = styled.div`
-  height: 50px;
-  width: 100%;
-  margin-top: 2%;
-  flexDirection: column;
-  display: flex;
-  margin-left: 1%;
+    height: 50px;
+    width: 100%;
+    margin-top: 2%;
+    flexDirection: column;
+    display: flex;
+    margin-left: 1%;
 `
 
 const SelectAnswer = styled.p`

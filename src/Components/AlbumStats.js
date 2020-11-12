@@ -229,15 +229,14 @@ const UsersInfo = styled.div`
 const User = styled.div`
     display: flex;
     flex-direction: column;
-    margin-left: 3%;
     margin-left: 40px;
-    margin-top: 1%;
+    margin-top: 78px;
 `
 
 const UsersReviews = styled.div`
-    margin-top: -11.5%;
-    margin-left: 11%;
     margin-bottom: 5%;
+    margin-top: -182px;
+    margin-left: 190px;
 `
 const TrackHeader = styled.table`
     font-size: 24px;
@@ -255,12 +254,13 @@ const RatingInput = styled.input`
 
 const Form = styled.form`
     margin-left: 2%;
+    margin-top: 70px;
 `
 
 const OwnReview = styled.div`
     display: flex;
     flex-direction: column;
-    margin-top: 3.5%;
+    margin-top: 155px;
     margin-left: 38px;
 `
 const BadgeDiv = styled.div`
@@ -268,7 +268,7 @@ const BadgeDiv = styled.div`
 `
 
 const OwnBadgeDiv = styled.div`
-    margin-top: -32px;
+    margin-top: -31px;
 `
 
 const SubmitButton = styled.button`

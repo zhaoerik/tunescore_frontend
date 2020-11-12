@@ -60,9 +60,9 @@ const Profile = (props) => {
                     <UserInfo>
                         <br />
                         <UserName>{user.username}</UserName>
-                        <h4>{user.name}</h4>
-                        <h4>{user.email}</h4>
-                        <h4>{user.badge}</h4>
+                        <h3>{user.name}</h3>
+                        <h3>{user.email}</h3>
+                        <h3>{user.badge}</h3>
                         <br />
                     </UserInfo>
                     <ReviewHeader>My Reviews</ReviewHeader>
@@ -85,7 +85,7 @@ const UserImage = styled.img`
     height: 200px;
     width: 200px;
     margin-top: 6%;
-    margin-left: 44.5%;
+    margin-left: 801px;
     display: flex;
 `
 

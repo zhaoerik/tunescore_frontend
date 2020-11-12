@@ -67,7 +67,7 @@ const Signup = (props) => {
                 <p><Input type="text" name="name" placeholder="Full Name" value={name} onChange={changeHandle} /></p>
                 <p><Input type="text" name="email" placeholder="Email Address" value={email} onChange={changeHandle} /></p>
                 <p><Input type="text" name="image" placeholder="Profile Picture" value={image} onChange={changeHandle} /></p>
-                <Button>Sign Up</Button>
+                <Button><b>Sign Up</b></Button>
             </Form>
         </>
     )

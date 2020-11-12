@@ -31,6 +31,10 @@ const Background = styled.img`
 `
 
 const Div = styled.div`
-    background-color: white;
+    background-color: #ffffffc2;
     text-align: center;
+    position: absolute;
+    width: 40%;
+    bottom: 35%;
+    left: 30%;
 `

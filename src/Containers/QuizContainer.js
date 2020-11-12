@@ -68,4 +68,6 @@ const Subtitle = styled.h2`
 const Div = styled.div`
     background-color: white;
     text-align: center;
+    padding-top: .5%;
+    padding-bottom: .5%;
 `

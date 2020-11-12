@@ -47,7 +47,7 @@ const Login = (props) => {
                     <Input type='password' placeholder='Password' name="password" value={password} onChange={changeHandle}></Input>
                     <br></br><br></br>
                     <Button type='submit'><b>Log In</b></Button>
-                    <h3>New to the App? <NavLink to='/signup'>Sign Up Now!</NavLink></h3>
+                    <h3>New to the App? <SignUpLink to='/signup'>Sign Up Now!</SignUpLink></h3>
                 </Form>
             </>
     )
@@ -109,4 +109,8 @@ const Button = styled.button`
     color: white;
     border-radius: 5px;
     border: 0px;
+`
+
+const SignUpLink = styled(NavLink)`
+    color: #8c55ef;
 `
