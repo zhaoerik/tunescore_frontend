@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components'
 
 const background = "https://media0.giphy.com/media/lmjzmEcZLkcMLtVrWi/giphy.gif"
-const logo = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/a32f693c-bcf5-4c71-8858-7be1aaf0867e/d6189x3-fb8eb1fd-d417-4ab1-bd30-5baff35ae933.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvYTMyZjY5M2MtYmNmNS00YzcxLTg4NTgtN2JlMWFhZjA4NjdlXC9kNjE4OXgzLWZiOGViMWZkLWQ0MTctNGFiMS1iZDMwLTViYWZmMzVhZTkzMy5wbmcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ._2jr9E4odr5xyaRuyUYXScuNcgQ7xcKnLsYh5fZekVU"
 
 const Signup = (props) => {
 
@@ -40,8 +39,6 @@ const Signup = (props) => {
                 email: email,
                 image: image
             }
-            // console.log(userInfo)
-            // console.log(props)
             props.newUser(userInfo)
         } else {
             alert("Passwords do not match. Please try again!")

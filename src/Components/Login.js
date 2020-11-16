@@ -21,13 +21,10 @@ const Login = (props) => {
 
     const submitHandle = e => {
         e.preventDefault();
-        // console.log(props)
         let loginUser = props.users.find(user => user.username === username && user.password === password)
-        // console.log(loginUser)
         if (loginUser) {
             props.login(loginUser)
             setUserFound(!userFound)
-            // console.log(props)
         } else {
             alert("Incorrect Username or Password. Please try again.")
             setUsername("")

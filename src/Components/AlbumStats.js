@@ -51,10 +51,8 @@ const AlbumStats = (props) => {
     const changeHandle = e => {
         if (e.target.name === "description") {
             setDescription(e.target.value)
-            // console.log(e.target.value)
         } else if (e.target.name === "rating") {
             setRating(e.target.value)
-            // console.log(e.target.value)
         }
     }
 
@@ -62,10 +60,6 @@ const AlbumStats = (props) => {
         e.preventDefault()
         let userReviews = reviewApi.filter(review => review.user.id === props.user.id)
         let userAlbumReviews = userReviews.filter(review => review.album.name === props.album.name)
-        //console.log(userReviews)
-        // props.newReview(props.album, props.user, description, rating)
-        // setDescription("");
-        // setRating("");
         if (userAlbumReviews.length === 0) {
             props.newReview(props.album, props.user, description, rating)
             setDescription("");
@@ -91,7 +85,6 @@ const AlbumStats = (props) => {
 
     const renderTracks = () => {
         return props.album.tracks.map(track =>
-            // <ol key={track.id}>
             <table>
                 <tr key={track.id}>
                     <td><b>{track.name}</b></td>
@@ -99,14 +92,8 @@ const AlbumStats = (props) => {
                     <td>{explicit(track.explicit)}</td>
                 </tr>
             </table>
-            // <b>{track.name}</b>  Popularity: {track.popularity} Explicit: {explicit(track.explicit)}
-            // <br></br> 
-            // </ol>
         )
     }
-
-    let reviewIds = props.album.reviews.map(review => review.id)
-    let userReviewId = props.user.reviews.map(review => review.id)
 
     const otherReviews = () => {
         const albumReviews = reviewApi.filter(review => review.album.name === props.album.name)
