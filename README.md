@@ -1,7 +1,7 @@
 # TuneScore
 
 ### Summary
-This app will allow users to review a collection of music albums along with other users. Users are able to play a lyric game where points are given to the user for correctly finishing the lyrics. After playing, the user has a chance to earn badges depending on their performance of playing the game, reflecting the user’s knowledge in the music world
+This app will allow users to review a collection of music albums along with other users. Users are able to play a lyric game where points are given to the user for correctly finishing the lyrics. After playing, the user has a chance to earn badges depending on their performance of playing the game, reflecting the user’s knowledge in the music world.
 
 ### User Stories
 - As a user I can login/signup/logout
